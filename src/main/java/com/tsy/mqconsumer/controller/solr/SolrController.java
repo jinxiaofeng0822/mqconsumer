@@ -40,7 +40,7 @@ public class SolrController {
     public String solrQuery(){
         System.out.println("solrQuery");
         SolrQuery solrQuery = new SolrQuery();
-        solrQuery.set("q","一");
+        solrQuery.set("q","不知道");
         try {
             QueryResponse response = client.query(solrQuery);
             SolrDocumentList list = response.getResults();
@@ -115,10 +115,7 @@ public class SolrController {
     public String searchSolr(){
 
         SolrQuery sq = new SolrQuery();
-//        sq.set("q","脖子痛");
-//        sq.setQuery("title:总是");
-        sq.setQuery("my_field1:三四十年");
-
+        sq.set("q","my_field1:三四十年 OR title:总是");
         QueryResponse response = null;
         try {
             response = client.query(sq);
