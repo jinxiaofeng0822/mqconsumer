@@ -115,7 +115,9 @@ public class SolrController {
     public String searchSolr(){
 
         SolrQuery sq = new SolrQuery();
-        sq.set("q","脖子痛");
+//        sq.set("q","脖子痛");
+//        sq.setQuery("title:总是");
+        sq.setQuery("my_field1:三四十年");
 
         QueryResponse response = null;
         try {
@@ -126,6 +128,7 @@ public class SolrController {
             e.printStackTrace();
         }
         SolrDocumentList list = response.getResults();
+        System.out.println("查询到"+list.size()+"条");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
