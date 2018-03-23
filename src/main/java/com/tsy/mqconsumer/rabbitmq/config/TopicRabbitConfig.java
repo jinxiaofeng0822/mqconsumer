@@ -28,7 +28,10 @@ public class TopicRabbitConfig {
 		return new Queue("log.jxf");
 	}
 
-
+	@Bean
+	public Queue goodsUpdateQueue(){
+		return new Queue("goodsUpdate");
+	}
 	@Bean
 	TopicExchange exchange() {
 		return new TopicExchange("topicExchange");
@@ -47,6 +50,11 @@ public class TopicRabbitConfig {
 	@Bean
 	Binding bindingExchangeLogAll(Queue jxfQueue, TopicExchange exchange) {
 		return BindingBuilder.bind(jxfQueue).to(exchange).with("lll.*");
+	}
+
+	@Bean
+	Binding bindingExchangeGoodsUpdate(Queue goodsUpdateQueue, TopicExchange exchange) {
+		return BindingBuilder.bind(goodsUpdateQueue).to(exchange).with("goods.update");
 	}
 
 }

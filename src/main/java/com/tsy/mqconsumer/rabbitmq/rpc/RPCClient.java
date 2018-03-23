@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+import static com.tsy.mqconsumer.rabbitmq.config.RpcRabbitConfig.QUEUE_ASYNC_RPC;
 import static com.tsy.mqconsumer.rabbitmq.config.RpcRabbitConfig.QUEUE_SYNC_RPC;
 
 @Component
@@ -29,4 +30,9 @@ public class RPCClient {
 		return result;
 	}
 
+	public String searchGoods(String searchWord){
+		String result = (String) amqpTemplate.convertSendAndReceive(QUEUE_SYNC_RPC, searchWord);
+		log.info("searchGoods:{}",result);
+		return result;
+	}
 }

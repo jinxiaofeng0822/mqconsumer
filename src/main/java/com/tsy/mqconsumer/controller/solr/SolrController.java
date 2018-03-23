@@ -7,6 +7,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import java.io.IOException;
 
 @RestController
 public class SolrController {
+    private static final Logger log = LoggerFactory.getLogger(SolrController.class);
 
     @Autowired
     private SolrClient client;
@@ -115,7 +118,7 @@ public class SolrController {
     public String searchSolr(){
 
         SolrQuery sq = new SolrQuery();
-        sq.set("q","my_field1:三四十年 OR title:总是");
+        sq.set("q","my_field1:三四十年 OR title:名字");
         QueryResponse response = null;
         try {
             response = client.query(sq);
@@ -126,6 +129,7 @@ public class SolrController {
         }
         SolrDocumentList list = response.getResults();
         System.out.println("查询到"+list.size()+"条");
+        log.info("查询到{}条",list.size());
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }

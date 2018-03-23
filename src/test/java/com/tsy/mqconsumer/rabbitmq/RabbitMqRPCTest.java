@@ -23,4 +23,15 @@ public class RabbitMqRPCTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void searchWordTest(){
+        String result = client.searchGoods("副标题");
+        System.out.println(result);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
