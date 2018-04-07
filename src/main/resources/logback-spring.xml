@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" scanPeriod="600 seconds" debug="false">
     <contextName>logback</contextName>
-    <property name="log.path" value="D:\log\mqconsumer" />
-
+    <!--<property name="log.path" value="D:\log\mqconsumer" />-->
+    <property name="log.path" value="/logs/mqconsumer" />
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
@@ -15,7 +15,7 @@
     <!-- Console 输出设置 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%clr(%d{HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+            <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
             <charset>utf8</charset>
         </encoder>
     </appender>
@@ -23,10 +23,12 @@
     <!--输出到文件-->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>D:\log\mqconsumer\mqconsumer.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--<fileNamePattern>D:\log\mqconsumer\mqconsumer.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <fileNamePattern>/logs/mqconsumer/mqconsumer.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <!--<pattern>${CONSOLE_LOG_PATTERN}</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } - [%15.15t] %-40.40logger{39} : %m%n</pattern>
         </encoder>
     </appender>
 
